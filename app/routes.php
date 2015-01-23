@@ -11,7 +11,14 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+
+
+
+// protect against CSRF all POST requests
+Route::when('*', 'csrf', array('post'));
+
+Route::controller('user', 'UserController');
+Route::controller('hangouts', 'HangoutController');
+Route::controller('admin', 'AdminController');
+Route::controller('threads', 'ThreadController');
+Route::get('/', 'ThreadController@getIndex');

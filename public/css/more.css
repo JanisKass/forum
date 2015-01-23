@@ -1,0 +1,18 @@
+/*
+This is additional CSS so site template is not altered from original state
+*/
+
+.error_msg {
+    color: red;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.success_msg {
+    color: green;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+

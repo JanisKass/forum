@@ -23,4 +23,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+        // determine if User is admin by checking DB field class (default is 1, 2 is admin)
+        public function isAdmin() {
+            return ($this->class == 2);
+        }
+        
+        public function isNotified(){
+            return ($this->notification == 1);
+        }
 }
