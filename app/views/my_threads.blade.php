@@ -2,23 +2,16 @@
 @section('content')
 
 <div class="pure-u-1">
-
-@foreach ( $categories as $category )
-
-<div class="pure-menu pure-menu-open pure-menu-horizontal code">
-    <a href="{{{ url('threads/category', $category->id) }}}" class="pure-menu-heading">{{{ $category->name }}}</a>
+<div class="pure-menu pure-menu-open pure-menu-horizontal">
+    <a href="user" class="pure-menu-heading">{{{ Auth::user()->username }}}</a>
 
     <ul>
-        @if(Request::url() === 'http://forum.dev/threads')
-        <li><a href="{{{ url('threads/category', $category->id) }}}">{{{$action}}}</a></li>
-        @else
-        <li><a href="/threads">{{{$action}}}</a></li>
-        @endif
-        <li><a href="{{{ url('threads/new', $category->id) }}}">+ New thread</a></li>
+        <li><a href="/user">Back</a></li> 
     </ul>
 </div>
-
-@foreach ($category->$threads as $thread )
+    
+    <h1>My threads</h1>
+@foreach ($threads as $thread )
     
       <div class="pure-u-1">
         
@@ -46,7 +39,6 @@
                 </div>
                
 @endforeach 
-@endforeach
 
 </div>
 

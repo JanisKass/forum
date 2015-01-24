@@ -8,7 +8,7 @@
 <div class="pure-menu pure-menu-open pure-menu-horizontal pure-u-1">
     <ul >
         <li><a href="user">My profile</a></li>
-        <li><a href="user/my_threads">My threads</a></li>
+        <li><a href="{{{url('threads/user', Auth::user()->username)}}}">My threads</a></li>
         <li><a href="user/my_comments">My comments</a></li>     
     </ul>
 </div>

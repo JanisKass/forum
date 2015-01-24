@@ -13,11 +13,18 @@ public function getCategory($category_id)
         
         return View::make('threads', array('categories' => $category, 'threads' => 'threads', 'action'=> 'Back'));
     }
-    
+   
 public function getNew($category_id) 
 {
+    $category = Category::findOrFail($category_id);
+    return View::make('thread_add', array('category'=>$category));
     
-    return View::make('thread_add', array('category'=>$category_id));
+}
+public function getUser() 
+{
+    $user = Auth::user()->id;
+    
+    return View::make('my_threads', array('threads'=>DB::table('threads')->where('user_id', $user)));
     
 }
 }

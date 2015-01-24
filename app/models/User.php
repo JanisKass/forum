@@ -31,4 +31,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         public function isNotified(){
             return ($this->notification == 1);
         }
+        
+        public function threads() {
+            return $this->hasMany('Thread');
+        }
 }
