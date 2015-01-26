@@ -18,8 +18,8 @@ class Thread extends Eloquent {
         );
     }
     
-    public function comment(){
-        return $this->hasMany('Comment');
+    public function comments(){
+        return $this->hasMany('Comment')->orderBy('created_at', 'desc');
     }
 
 }

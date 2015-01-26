@@ -15,10 +15,15 @@
 
 
 // protect against CSRF all POST requests
-Route::when('*', 'csrf', array('post'));
+//Route::when('*', 'csrf', array('post'));
 
-Route::controller('user', 'UserController');
-Route::controller('hangouts', 'HangoutController');
-Route::controller('admin', 'AdminController');
+if (!Request::is('threads/search'))
+{
+ Route::when('*', 'csrf', array('post'));
+}
 Route::controller('threads', 'ThreadController');
+Route::controller('user', 'UserController');
+Route::controller('admin', 'AdminController');
+Route::controller('category', 'CategoryController');
+
 Route::get('/', 'ThreadController@getIndex');

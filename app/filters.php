@@ -41,7 +41,7 @@ Route::filter('auth', function()
 		{
 			return Response::make('Unauthorized', 401);
 		}
-		return Redirect::guest('login');
+		return Redirect::guest('user/login');
 	}
 });
 
@@ -84,4 +84,13 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+// Custom filter checking if user is admin
+Route::filter('admin', function()
+{
+        if (!(Auth::check() && Auth::user()->isAdmin()))
+        {
+            return Redirect::to('user')->withErrors('Access denied to ADMIN functionality!');
+        }
 });

@@ -22,7 +22,7 @@ class CreateUsers extends Migration {
                 $table->string('email');
                 $table->string('password', 60);
                 $table->string('username', 100);
-                $table->string('picture', 250)->nullable();
+                $table->boolean('picture')->default(false);
                 $table->boolean('notification')->default(true);
                 $table->tinyInteger('class')->default(1);
             });

@@ -14,5 +14,40 @@ This is additional CSS so site template is not altered from original state
     padding: 10px;
     margin: 10px;
 }
+#picture-table{
+border: 0px;
+}
+#profile-table{
+border: 0px;
+}
+#profile-table td {
+border: 0px;
+background-color: transparent;
+color: #71a46a
+}
+.user{
+color:#1f8dd6;
+font-size:12px;
+}
+#admin-button{
+background-color:#CCFF33;
+}
+#category-menu{
+background-color:#191818;
+color:#999;
+
+}
+#category-menu .pure-menu-heading{
+color:#CCFF33;
+}
+
+#category-menu a:hover{
+background-color:#CCFF33;
+color:#191818;
+}
+.thread-link{
+color:#CCFF33;
+text-decoration:none;
+}
 
 

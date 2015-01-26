@@ -22,8 +22,8 @@ public function postRegister()
         
         if ($validator->passes())
         {
+            if(isset($data['picture']))
             $image = Input::file('image');
-            $fileName = $image->getClientOriginalName();
             $destinationPath = asset('prof_images/');
             
             
@@ -31,11 +31,14 @@ public function postRegister()
             $user->username = $data['username'];
             $user->email = $data['email'];
             $user->password = Hash::make($data['password']);
-            $user->picture = $fileName;
-            $user->save();
+            if(isset($data['picture'])){
+            $user->picture = true;
+            }
             
+            $user->save();
+             if(isset($data['picture'])){
             $image->move($destinationPath, "$user->id.jpg");
-          
+             }
             Auth::login($user);
             
             return Redirect::to('user')->withMessage('Successfully registered!');
@@ -79,12 +82,8 @@ public function postRegister()
             return Redirect::to('user/login');
         }
         
-        if (is_null(Auth::user()->picture)){
-                 $picture='https://www.statereforum.org/sites/default/files/styles/nashp_user_large/public/pictures/default_user_picture.png?itok=1l3g10WZ';
-                } else 
-                 {
-                $picture=asset('prof_images/'.Auth::user()->id.'.jpg');
-                 }
+          $picture=asset(Auth::user()->images()['asset_path'].Auth::user()->images()['image']);
+             
         
         return View::make('user', array('picture' => $picture));
                 
@@ -106,7 +105,7 @@ public function postRegister()
         if(isset($user->picture)){
             unlink("c:/wamp/www/forum/public/prof_images/$user->id.jpg");
         } 
-            $user->picture = $fileName;
+            $user->picture = true;
             $user -> save();
             $image->move("c:/wamp/www/forum/public/prof_images/","$user->id.jpg");
         
@@ -115,5 +114,41 @@ public function postRegister()
         }
         
         return Redirect::to('user')->withErrors($validator);
+    }
+    
+    public function postChangemail(){
+
+        $user= Auth::user();
+        $data = Input::all();
+        $rules = $rules = array(
+            'email' => 'required|email|unique:users,email'
+        );
+         $validator = Validator::make($data, $rules);
+         
+        if ($validator->passes())
+        {
+            $user->email = $data['email'];
+            $user->save();
+             
+         return Redirect::to('user')->withMessage('Your email has been changed!');
+        }
+        
+        return Redirect::to('user')->withErrors($validator);
+    }
+    
+    public function postNotify(){
+
+        $user= Auth::user();
+        $data = Input::all();
+         if(isset($data['notification'])){
+            $user->notification = true;
+            $user->save();
+         }
+         else{
+            $user->notification = false;
+            $user->save();
+         }
+         return Redirect::to('user')->withMessage('Your notification settings have been changed!');
+   
     }
 }

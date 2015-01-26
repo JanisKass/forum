@@ -32,7 +32,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return ($this->notification == 1);
         }
         
+         public function images() {
+             
+       if (!$this->picture){ 
+           return array(
+            'server_path' => public_path().'/prof_images/',
+            'asset_path' => 'prof_images/',
+            'image' => 'default.jpg',);
+            } else {
+            return array(
+            'server_path' => public_path().'/prof_images/',
+            'asset_path' => 'prof_images/',
+            'image' => $this->id.'.jpg',);
+            }   
+        
+         }
         public function threads() {
-            return $this->hasMany('Thread');
+            return $this->hasMany('Thread')->orderBy('created_at','asc');
+        }
+        
+        public function comments(){
+        return $this->hasMany('Comment');
         }
 }

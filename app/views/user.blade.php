@@ -5,24 +5,25 @@
 <p class="error_msg">{{ $message }}</p>
 @endforeach
 
-<div class="pure-menu pure-menu-open pure-menu-horizontal pure-u-1">
+<div class="pure-menu pure-menu-open pure-menu-horizontal pure-u-1" id="category-menu">
     <ul >
         <li><a href="user">My profile</a></li>
-        <li><a href="{{{url('threads/user', Auth::user()->username)}}}">My threads</a></li>
-        <li><a href="user/my_comments">My comments</a></li>     
+        <li><a href="{{{url('threads/mythreads')}}}">My threads</a></li>
+        <li><a href="threads/mycomments">My comments</a></li>     
     </ul>
 </div>
 
 
-<h3 class="pure-u-1">Your Profile Information </h3>
+<h3>Your Profile Information </h3>
 
-<div class="pure-u-1">
-    <table class="pure-table pure-table-horizontal pure-u-1">
+<div class="pure-u-1 large-12 columns">
+    <table class="pure-table pure-table-horizontal pure-u-1 " id="picture-table">
         <tr class="pure-u-1-1">
-      <td>
+      <td style="width:25%;">
         <img src="{{{ $picture }}}" class="pure-img"/>
     </td>
-    <td >
+    
+    <td>
         {{ Form::open(array('url'=>'user/change', 'files' => true, 'class'=>'pure-form-aligned'))}}
         <fieldset>
         <div class="pure-control-group">
@@ -39,26 +40,30 @@
   </table>
 </div>
 
-<div class="pure-u-1">
-    <table class="pure-table pure-table-horizontal pure-u-1">  
-    <tbody class="pure-u-1">
-   <tr>
-    <td>Username:</td>
-    <td>{{{Auth::user()->username}}}</td>
-    <td></td>
-    <td></td>
+<div class="pure-u-1 large-12 columns">
+    <table class="pure-table pure-table-horizontal profile-table pure-u-1" id="profile-table">  
+    <tbody class="pure-u-1 ">
+        <tr class="pure-u-1 ">
+            <td style="">Username:</td>
+            <td style="">{{{Auth::user()->username}}}</td>
+    
   </tr>
-  <tr >
-    <td>Email:</td>
-    <td >{{{Auth::user()->email}}}</td>
-    <td>{{ Form::submit('Change', $attributes=array('type'=>'submit', 'class'=>'pure-button'))}}</td>
+  <tr>
+    <td style="">Email:</td>
+    {{ Form::open(array('url'=>'user/changemail', 'class'=>'pure-form'))}}
+    <td style="">{{ Form::email('email',Auth::user()->email , array('placeholder'=>Auth::user()->email))}}</td>
+    <td>{{ Form::submit('Change', $attributes=array('type'=>'submit', 'class'=>'pure-button'))}}</td>{{ Form::close() }}
     <td>
     @if (Auth::user()->isNotified())
+    {{Form::open(array('url'=>'user/notify', 'class'=>'pure-form'))}}
     {{Form::checkbox('notification', '', array('checked'=>'checked'))}} 
     @else
+    {{Form::open(array('url'=>'user/notify', 'class'=>'pure-form'))}}
     {{Form::checkbox('notification')}}
     @endif
     {{ Form::label('notification', 'Send notifications to my email') }}
+    {{Form::submit('Save', $attributes=array('class'=>'pure-button'))}}
+    {{Form::close()}}
     </td>
   </tr>
   </tbody>

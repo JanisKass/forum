@@ -9,11 +9,6 @@ class CategoryController extends BaseController {
         $this->beforeFilter('admin');
     }
     
-    public function getAdd()
-    {
-        return View::make('category_add');
-    }
-    
     public function postAdd()
     {
         $data = Input::all();
@@ -26,16 +21,20 @@ class CategoryController extends BaseController {
         
         if ($validator->passes())
         {
-            $category = new Category();
-            
+            $category = new Category();  
             $category->name = $data['category'];
-            
             $category->save();
            
             return Redirect::to('admin')->withMessage('Category added!');
         }
         
-        return Redirect::to('category/add')->withErrors($validator);
+        return Redirect::to('admin')->withErrors($validator);
+    }
+    
+    public function postDelete(){
+        $category=  Category::find(Input::get('category'));
+        $category->delete();
+        return Redirect::back()->withMessage('Category has been successfully deleted!');  
     }
 }
 

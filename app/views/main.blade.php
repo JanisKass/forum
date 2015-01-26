@@ -38,11 +38,7 @@
             <ul>
                 <li><a href="/threads">Threads</a></li>
                 <li>
-                    <a href="/hangouts">Hangouts</a>
-                    <ul>
-                        <li><a href="/hangouts/all">All hangouts</a></li>
-                        <li><a href="/hangouts/your">Your hangouts</a></li>
-                </ul>
+                    <a href="/threads/search">Search</a>
             </li>
          @if ( Auth::guest() )
             <li><a href="/user/login">Login</a></li>
