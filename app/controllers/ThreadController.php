@@ -117,8 +117,9 @@ public function getSearch()
     return View::make('search');
 }
  public function postSearch() {
- 
-    return Thread::where('title', 'LIKE', '%'.Input::get('search').'%')->get(array('id', 'title'));
+     
+     $threads=Thread::where('title', 'LIKE', '%'.Input::get('search').'%');
+    return View::make('search', array('threads'=>$threads));
 
     }
 public function postDelete($thread_id) {

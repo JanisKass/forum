@@ -193,7 +193,7 @@ small screens.
         height: 0.2em;
     }
 
-        .menu-link span:before,
+        #menuLink .menu-link span:before,
         .menu-link span:after {
             position: absolute;
             margin-top: -0.6em;

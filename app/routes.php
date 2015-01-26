@@ -15,12 +15,8 @@
 
 
 // protect against CSRF all POST requests
-//Route::when('*', 'csrf', array('post'));
-
-if (!Request::is('threads/search'))
-{
  Route::when('*', 'csrf', array('post'));
-}
+
 Route::controller('threads', 'ThreadController');
 Route::controller('user', 'UserController');
 Route::controller('admin', 'AdminController');
